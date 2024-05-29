@@ -1,0 +1,29 @@
+# PlatformIO
+.pio/
+.clang_complete
+.vscode/
+*.elf
+*.bin
+*.hex
+*.pyc
+*.pyo
+*.pyd
+.pioenvs/
+build/
+
+# Arduino
+*.cpp~
+*.d
+*.dSYM/
+*.elf
+*.hex
+*.ino~
+*.o
+*.pyc
+*.pyo
+
+# CLion
+.idea/
+
+# Ignore secrets.h
+/src/secrets.h
