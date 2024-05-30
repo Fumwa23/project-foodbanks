@@ -54,8 +54,15 @@ const int LED_PIN = 4;
 
 HX711 scale;
 
+// Setting up buttons
+const int BUTTON_PIN = 2;
+int buttonState = 1;
+
 void setup() {
   Serial.begin(115200);
+  //BUTTON SETUP ---------------------------------------------------------
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
   //Flash once to show that it has started
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
@@ -155,6 +162,8 @@ void setup() {
 }
 
 void loop() {
+  buttonState = digitalRead(BUTTON_PIN);
+
   bool ready = GSheet.ready(); //Checking if the Google Sheet is ready to upload data
 
   float weight = scale.get_units(10);
@@ -163,7 +172,8 @@ void loop() {
 
   scale.power_down();             // put the ADC in sleep mode
 
-  if (weight > 50.0 && ready && millis() - lastTime > timerDelay) {
+  //if (weight > 50.0 && ready && millis() - lastTime > timerDelay) {
+  if (buttonState == LOW && ready && millis() - lastTime > timerDelay) {
     digitalWrite(LED_PIN, HIGH); 
     delay(500);
     digitalWrite(LED_PIN, LOW);
